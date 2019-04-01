@@ -65,6 +65,7 @@ PORT display_mode_i = "", DIR = I, VEC = [1:0]
 PORT vga_hsync_o = "", DIR = O    
 PORT vga_vsync_o = "", DIR = O         
 PORT pix_clock_o = "", DIR = O    
+PORT blank_o = "", DIR = O
 PORT psave_o = "", DIR = O        
 PORT sync_o = "", DIR = O         
 PORT red_o = "", DIR = O, VEC = [7:0]          

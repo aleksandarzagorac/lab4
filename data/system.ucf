@@ -52,7 +52,7 @@ NET vga_ctrl_0_display_mode_i_pin(1) LOC = K19;
 NET vga_ctrl_0_vga_hsync_o_pin       LOC = B22  | IOSTANDARD = LVTTL;
 NET vga_ctrl_0_vga_vsync_o_pin       LOC = A22  | IOSTANDARD = LVTTL;
 
-NET blank_o           LOC = B16  | IOSTANDARD = LVTTL;
+NET vga_ctrl_0_blank_o_pin           LOC = B16  | IOSTANDARD = LVTTL;
 NET vga_ctrl_0_pix_clock_o_pin       LOC = C14  | IOSTANDARD = LVTTL;
 NET vga_ctrl_0_psave_o_pin           LOC = A2   | IOSTANDARD = LVTTL;
 NET vga_ctrl_0_sync_o_pin            LOC = A17  | IOSTANDARD = LVTTL;

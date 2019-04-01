@@ -30,6 +30,7 @@
  PORT vga_ctrl_0_red_o_pin = vga_ctrl_0_red_o, DIR = O, VEC = [7:0]
  PORT vga_ctrl_0_green_o_pin = vga_ctrl_0_green_o, DIR = O, VEC = [7:0]
  PORT vga_ctrl_0_blue_o_pin = vga_ctrl_0_blue_o, DIR = O, VEC = [7:0]
+ PORT vga_ctrl_0_blank_o_pin = vga_ctrl_0_blank_o, DIR = O
 
 
 BEGIN proc_sys_reset
@@ -200,5 +201,6 @@ BEGIN vga_ctrl
  PORT red_o = vga_ctrl_0_red_o
  PORT green_o = vga_ctrl_0_green_o
  PORT blue_o = vga_ctrl_0_blue_o
+ PORT blank_o = vga_ctrl_0_blank_o
 END
 

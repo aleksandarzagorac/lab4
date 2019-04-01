@@ -95,8 +95,10 @@ entity user_logic is
     -- DO NOT EDIT BELOW THIS LINE ---------------------
     -- Bus protocol parameters, do not add to or delete
     C_NUM_REG                      : integer              := 1;
-    C_SLV_DWIDTH                   : integer              := 32
+    C_SLV_DWIDTH                   : integer              := 32;
     -- DO NOT EDIT ABOVE THIS LINE ---------------------
+	 
+	 C_S_AXI_ADDR_WIDTH             : integer              := 32
   );
   port
   (
@@ -129,6 +131,10 @@ entity user_logic is
     IP2Bus_RdAck                   : out std_logic;
     IP2Bus_WrAck                   : out std_logic;
     IP2Bus_Error                   : out std_logic
+	 
+	 Bus2IP_Addr           : out std_logic_vector((C_S_AXI_ADDR_WIDTH-1) downto 0);
+    Bus2IP_RNW            : out std_logic;
+    Bus2IP_CS             : out std_logic;
     -- DO NOT EDIT ABOVE THIS LINE ---------------------
   );
 
@@ -279,6 +285,10 @@ architecture IMP of user_logic is
   signal slv_ip2bus_data                : std_logic_vector(C_SLV_DWIDTH-1 downto 0);
   signal slv_read_ack                   : std_logic;
   signal slv_write_ack                  : std_logic;
+  
+  signal global_we 							 :std_logic;
+  signal unit_addr                      : std_logic_vector(22 downto 0); 
+  signal unit_id								 : std_logic_vector(1 downto 0);
 
 begin
 
@@ -336,14 +346,14 @@ begin
     clk_i              => clk_i,
     reset_n_i          => reset_n_i,
     --
-    direct_mode_i      => direct_mode,
+    direct_mode_i      => direct_mode_i,
     dir_red_i          => dir_red,
     dir_green_i        => dir_green,
     dir_blue_i         => dir_blue,
     dir_pixel_column_o => dir_pixel_column,
     dir_pixel_row_o    => dir_pixel_row,
     -- cfg
-    display_mode_i     => display_mode,  -- 01 - text mode, 10 - graphics mode, 11 - text & graphics
+    display_mode_i     => display_mode_i,  -- 01 - text mode, 10 - graphics mode, 11 - text & graphics
     -- text mode interface
     text_addr_i        => char_address,
     text_data_i        => char_value,
@@ -507,5 +517,18 @@ begin
   IP2Bus_WrAck <= slv_write_ack;
   IP2Bus_RdAck <= slv_read_ack;
   IP2Bus_Error <= '0';
+  
+  
+  unit_addr <= Bus2IP_Addr(23 downto 2);
+  unit_id <= Bus2IP_Addr(25 downto 24);
+  global_we <= Bus2IP_CS and not(Bus2IP_RNW);
+  
+  process() begin
+		if(global_we = '1') then 
+			if(unit_id = "00") then
+				
+			end if;
+		end if;
+  end process;
 
 end IMP;
